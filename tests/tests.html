@@ -8,36 +8,18 @@
 	
 	<script src="../stringTemplate.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../table.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="../table.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
   <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
 	<script type="text/javascript" src="qunit.js"></script>
 
 <script>
-// set up
-var _rows = [], 
-	_fields = [
-		{name: 'key', type: 'number'},
-		{name: 'name', type: 'string'},
-		{name: 'select', type: 'select', options: ['First','Second','Third','Fourth']},
-		{name: 'number', type: 'number'},
-		{name: 'block', type: 'block'},
-		{name: 'date', type: 'date'}
-	]
+$q = jQuery.noConflict(true),   
+	$ = null,  
+	jQuery = null;
+$q(document).ready( function() { 
+	$q('#myframe').load(function(){
 
-for (var i=0; i < 100; i++) _rows.push( {
-		key: (i+1), 
-		name: makeString(10),
-		select: ['First','Second','Third','Fourth'][Math.floor( Math.random()*4)],
-		block: [
-				makeString(Math.floor(Math.random()*20+10)),
-				makeString(Math.floor(Math.random()*20+10)),
-				makeString(Math.floor(Math.random()*20+10))
-			].join("\n"), 
-		date: '11/'+i+'/11', 
-		number: Math.round(Math.random()*10) 
-	});
-
-var grid = new tableModel(_rows, _fields);
 
 $(document).ready(function(){
 	ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.templates));
@@ -62,8 +44,8 @@ $(document).ready(function(){
 	<div id="qunit-testrunner-toolbar"></div>
 	<h2 id="qunit-userAgent"></h2>
 	<ol id="qunit-tests"></ol>
-	<div id="qunit-fixture">
-		<div class="table" data-bind="table: grid"></div>
-	</div>
+	<div id="qunit-fixture"></div>
+	<iframe id="myframe" src="../index.html" ></iframe>
+	
 </body>
 </html>
