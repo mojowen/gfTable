@@ -20,20 +20,23 @@ $q = jQuery.noConflict(true),
 $q(document).ready( function() { 
 	$q('#myframe').load(function(){
 
+		$ = window.frames[0].jQuery;
 
-$(document).ready(function(){
-	ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.templates));
-	ko.applyBindings( grid );
-
-	test("Basic Rendering", function() {
-		ok( true, "no flags pass" );
-		equal( $('.table .row').length, _rows.length , "All the rows render" )
-		equal( $('.table .row:first .entry').length, _fields.length , "All fields render" )
+		test("Basic Rendering", function() {
+			ok( true, "no flags pass" );
+			equal( $('.table .row').length, 30 , "First rows load" )
+			equal( $('.table .row:first .entry').length, window.frames[0]._fields.length , "All fields render" )
+		});
+		test('Scrolling', function() {
+			$('.body').scrollLeft(100)
+			stop()
+			setTimeout( function() { equal( $('.body').scrollLeft(), $('.header').scrollLeft(),'Horizontal scrolls are synced'); start() }, 1)
+			$('.body').scrollTop(800)
+			stop()
+			setTimeout( function() { equal( $('.body .row').length, 40,'Vertical lazy load works'); start() }, 1)
+			
+		})
 	});
-	test('Scrolling', function() {
-		$('.body').scrollLeft(100)
-		equal($('.body').scrollLeft(),$('.header').scrollLeft(),'Horizontal scrolls are synced')
-	})
 });
 </script>
   
