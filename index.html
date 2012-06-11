@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>index</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Scott Duncombe">
+	<!-- Date: 2012-06-08 -->
+	<script src="lib/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/knockout-latest.debug.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/lib.js" type="text/javascript" charset="utf-8"></script>
+	<script src="stringTemplate.js" type="text/javascript" charset="utf-8"></script>
+	<script src="table.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="table.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	
+</head>
+<body>
+
+	<div class="table" data-bind="table: grid"></div>
+
+	<script type="text/javascript" charset="utf-8">
+		var _rows = [], 
+			_fields = [
+				{name: 'key', type: 'number'},
+				{name: 'name', type: 'string'},
+				{name: 'select', type: 'select', options: ['First','Second','Third','Fourth']},
+				{name: 'number', type: 'number'},
+				{name: 'block', type: 'block'},
+				{name: 'date', type: 'date'}
+			]
+
+		for (var i=0; i < 100; i++) _rows.push( {
+				key: (i+1), 
+				name: makeString(10),
+				select: ['First','Second','Third','Fourth'][Math.floor( Math.random()*4)],
+				block: [
+						makeString(Math.floor(Math.random()*20+10)),
+						makeString(Math.floor(Math.random()*20+10)),
+						makeString(Math.floor(Math.random()*20+10))
+					].join("\n"), 
+				date: '11/'+i+'/11', 
+				number: Math.round(Math.random()*10) 
+			});
+
+		var grid = new tableModel(_rows, _fields);
+		ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.templates));
+		ko.applyBindings( grid );
+		
+	</script>
+</body>
+</html>
