@@ -1,0 +1,47 @@
+body {
+	font-family: Helvetica, sans-serif;
+	margin: 120px 300px;
+}
+
+.table {
+	border-bottom: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+}
+.header {
+	width: 95%;
+	overflow: hidden;
+}
+.title {
+	font-weight: bold; 
+	text-align: center;
+	background: #a1a1a1;
+	color: #333;
+	height: 30px !important;
+}
+
+.body {
+	height: 90%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: visible;
+}
+.row {
+	border: 0;
+	margin: 0;
+	clear: both;
+}
+.entry {
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	padding: 4px;
+	width: 100px;
+	height: 20px;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
