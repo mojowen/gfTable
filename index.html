@@ -23,7 +23,7 @@
 </head>
 <body>
 
-	<div class="table" data-bind="table: grid"></div>
+	<div class="table" data-bind="template: {name: 'table', with: grid } "></div>
 
 	<script type="text/javascript" charset="utf-8">
 		var _rows = [], 
