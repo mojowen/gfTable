@@ -61,7 +61,6 @@ tableModel = function(rows, fields) {
 	this.__widths = 60;
 	this.__templates['number'] = '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\'"></textarea>'+
 	'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
-	
 
 	// Block
 	$(document).on({
@@ -81,6 +80,20 @@ tableModel = function(rows, fields) {
 		height: 'auto',
 		autoOpen: true
 	}};
+	$(document).on({
+		click: function(e) {
+			var options = new multiselect(),
+				$element = $(this).hide().next('select')
+			options.multiple = false
+			options.appendTo = $element.parents('.body')
+			$element.multiselect(options)
+		}
+	},'.select button.trigger')
+	this.__widths['select'] = 120;
+	this.__templates['select'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.name] "></button>'+
+		'<select style="display: none;"  data-bind="betterSelect: true, value: $parent[$data.name], options: $data.options, optionsCaption: \'--\'" class="data select"></select>';
+
+
 	return this;
 }
 	
