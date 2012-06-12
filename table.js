@@ -1,12 +1,13 @@
 tableModel = function(rows, fields) {
 	this.__templates = {
-		table: '<div class="header"><div class="inner" data-bind="style: { width: fields.__width() }, template: { name: \'header\', foreach: fields() }"><div class="ender"></div></div></div>'+
-			'<div class="body" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: fields.__width() }" ></div></div>',
+		table: '<div class="header"><div class="inner" data-bind="style: { width: (fields.__width()+20)+\'px\' }, template: { name: \'header\', foreach: fields() }"><div class="ender"></div></div></div>'+
+			'<div class="body" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: fields.__width()+\'px\' }" ></div></div>',
 		header: '<div class="title entry" data-bind="text: $data.name, setClass: $data.type"></div>',
 		row: '<div class="row" data-bind="template: {name: \'entry\', foreach: $parent.fields() }"></div>',
 		entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setClass: $data.type"></div>',
 		text: '<textarea data-bind="value: $parent[$data.name]"></textarea>'
 	}
+	this.__widths = {}
 
 	this.rows = ko.observableArray(rows)
 	this.rows.__base = ko.observable(20)
@@ -16,20 +17,16 @@ tableModel = function(rows, fields) {
 		return  __more ? this.rows().slice(0, this.rows.__base() ) : this.rows();
 		
 	},this)
+
 	this.fields = ko.observableArray(fields)
 	this.fields.__width = ko.computed(function() { 
 		var width = 0, fields = this.fields()
 		for (var i=0; i < fields.length; i++) {
-			switch(fields[i].type) {
-				case 'number':
-					width += 60
-					break;
-				default:
-					width += 100;
-			}
+			if( typeof this.__widths[ fields[i].type ] == 'undefined' ) width += 100
+			else width += this.__widths[ fields[i].type ]
 			width += 4
 		};
-		return width+'px'
+		return width
 	},this)
 
 
@@ -60,7 +57,8 @@ tableModel = function(rows, fields) {
 		if( isNaN(parseInt(value)) ) return false;
 		observable(value+amount); 
 		e.preventDefault(); 
-	})
+	});
+	this.__widths = 60;
 	this.__templates['number'] = '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\'"></textarea>'+
 	'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
 	
