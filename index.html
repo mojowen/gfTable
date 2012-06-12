@@ -37,17 +37,17 @@
 			]
 
 		for (var i=0; i < 100; i++) _rows.push( {
-				key: (i+1), 
-				name: makeString(10),
-				select: ['First','Second','Third','Fourth'][Math.floor( Math.random()*4)],
-				block: [
-						makeString(Math.floor(Math.random()*20+10)),
-						makeString(Math.floor(Math.random()*20+10)),
-						makeString(Math.floor(Math.random()*20+10))
-					].join("\n"), 
-				date: '11/'+i+'/11', 
-				number: Math.round(Math.random()*10) 
-			});
+			key: ko.observable(i+1), 
+			name: makeString(10),
+			select: ['First','Second','Third','Fourth'][Math.floor( Math.random()*4)],
+			block: [
+					makeString(Math.floor(Math.random()*20+10)),
+					makeString(Math.floor(Math.random()*20+10)),
+					makeString(Math.floor(Math.random()*20+10))
+				].join("\n"), 
+			date: '11/'+i+'/11', 
+			number: ko.observable(Math.round(Math.random()*10) )
+		});
 
 		var grid = new tableModel(_rows, _fields);
 		ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.templates));
