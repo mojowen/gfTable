@@ -5,9 +5,7 @@ tableModel = function(rows, fields) {
 		header: '<div class="title entry" data-bind="text: $data.name, setClass: $data.type"></div>',
 		row: '<div class="row" data-bind="template: {name: \'entry\', foreach: $parent.fields() }"></div>',
 		entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setClass: $data.type"></div>',
-		text: '<textarea data-bind="value: $parent[$data.name]"></textarea>',
-		number: '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\'"></textarea>'+
-		'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>'
+		text: '<textarea data-bind="value: $parent[$data.name]"></textarea>'
 	}
 
 	this.rows = ko.observableArray(rows)
@@ -56,13 +54,16 @@ tableModel = function(rows, fields) {
 
 	// Useful functions for increasing 
 
-	// Number Bindings
+	// Number
 	$(document).on('click','.number_controls span', function(e) { 
 		var ctx = ko.contextFor(this), observable = ctx.$parent[ ctx.$data.name ], value = observable(), amount = $(this).hasClass('numberUp') ? 1 : -1
 		if( isNaN(parseInt(value)) ) return false;
 		observable(value+amount); 
 		e.preventDefault(); 
 	})
+	this.__templates['number'] = number: '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\'"></textarea>'+
+	'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
+	
 	
 	return this;
 }
