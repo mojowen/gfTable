@@ -3,39 +3,37 @@
 <html>
 <head>
 	<script src="../lib/jquery-latest.js"></script>
-	<script src="../lib/knockout-latest.debug.js"></script>
-	<script src="../lib/lib.js"></script>
-	
-	<script src="../stringTemplate.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../table.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" href="../table.css" type="text/css" media="screen" title="no title" charset="utf-8">
-
-  <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
 	<script type="text/javascript" src="qunit.js"></script>
 
 <script>
 $q = jQuery.noConflict(true),   
 	$ = null,  
-	jQuery = null;
+	jQuery = null,
+	ko = null
+	grid = null
 $q(document).ready( function() { 
 	$q('#myframe').load(function(){
 
-		$ = window.frames[0].jQuery;
+		$ = window.frames[0].jQuery,
+		grid = window.frames[0].grid,
+		ko = window.frames[0].ko
 
+		module('Structure and rendering')
 		test("Basic Rendering", function() {
 			ok( true, "no flags pass" );
-			equal( $('.table .row').length, 30 , "First rows load" )
+			equal( $('.table .row').length, 20 , "First rows load" )
 			equal( $('.table .row:first .entry').length, window.frames[0]._fields.length , "All fields render" )
 		});
 		test('Scrolling', function() {
 			$('.body').scrollLeft(100)
 			stop()
 			setTimeout( function() { equal( $('.body').scrollLeft(), $('.header').scrollLeft(),'Horizontal scrolls are synced'); start() }, 1)
-			$('.body').scrollTop(800)
+			$('.body').scrollTop( $('.body').height() )
 			stop()
-			setTimeout( function() { equal( $('.body .row').length, 40,'Vertical lazy load works'); start() }, 1)
-			
+			setTimeout( function() { equal( $('.body .row').length, 30,'Vertical lazy load works'); start() }, 1)
 		})
+
 		module('Number testing', {
 			setup: function() {
 				$cell = $('.body .entry.number:eq('+Math.floor( $('.body .entry.number').length*Math.random() - 1 )+')'),
