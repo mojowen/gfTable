@@ -50,9 +50,9 @@
 		});
 
 		var grid = new tableModel(_rows, _fields);
-		ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.templates));
+		ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.__templates));
 		ko.applyBindings( grid );
-		
+
 	</script>
 </body>
 </html>
