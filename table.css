@@ -80,3 +80,29 @@
 .entry.block.open { overflow: visible; }
 .entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }
 
+
+.ui-multiselect-menu { 
+	display: none; 
+	position: relative; 
+	top: 0; 
+	left: 0; 
+	width: auto !important;
+	max-width: 160px;
+	height: 150px;
+	overflow: auto; 
+	background-color: #fff; 
+	border: 2px solid #ddd;
+	text-align: left;
+	z-index: 10;
+}
+.ui-multiselect-menu input, .ui-multiselect-menu span, .ui-multiselect-menu label { font-size: 11px; }
+button.trigger, button.ui-multiselect { width: 80px; color: #747474 }
+.ui-multiselect.ui-state-active { color: #622; font-weight: bold }
+.ui-multiselect-menu ul {  list-style: none; margin: 0 0 0 -4px; padding: 0 0 0 10px; text-align: left }
+.ui-multiselect-menu ul li { margin: 4px 0 }
+.ui-multiselect-menu ul li span { padding: 0 6px }
+.ui-widget-header ul { margin: 0; font-size: 8px; padding: 0 }
+.ui-widget-header ul li {  margin: 2px 0; padding: 0 }
+.ui-widget-header ul li.other {  margin: 2px 0; padding: 0 }
+.ui-widget-header a.ui-multiselect-close :before { content: 'X '; }
+.ui-widget-header a.ui-multiselect-close :after { content: 'Close'; }

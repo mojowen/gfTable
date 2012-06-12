@@ -72,6 +72,15 @@ tableModel = function(rows, fields) {
 	this.__templates['block'] = '<textarea data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\', elastic: true" class="block data"></textarea>'
 	'<div class="block_controls field_controller"><em>Shift + Enter for line break</em</div>';
 
+	// Select
+	function multiselect() { return { 
+		header: '<li class="other"><a class="ui-multiselect-all" href="#"><span>+ Check all</span></a></li><li class="other"><a class="ui-multiselect-none" href="#"><span>- Uncheck all</span></a></li>',
+		selectedList: 1, 
+		position: {my: 'left top', at: 'left bottom', collision: 'none none' },
+		minWidth: 'auto',
+		height: 'auto',
+		autoOpen: true
+	}};
 	return this;
 }
 	
