@@ -6,7 +6,6 @@
 	overflow: hidden;
 }
 .header {
-	width: 95%;
 	overflow: hidden;
 }
 .title {
@@ -36,7 +35,7 @@
 .entry {
 	border-top: 1px solid #ddd;
 	border-right: 1px solid #ddd;
-	padding: 4px;
+	padding: 1px 0 0 1px;
 	width: 100px;
 	height: 30px;
 	float: left;
@@ -46,11 +45,19 @@
 }
 .entry textarea {
 	border: none;
-	height: 20px;
+	height: 28px;
 	resize: none;
+	overflow: hidden;
 	text-align: center;
-	width: 60px;
+	width: 98px;
+	padding: 4px;
 	float: left;
+	z-index: 10;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.entry textarea:focus {
+	border: 2px solid #333; 
 }
 .entry .field_controller {
 	float: right;
@@ -65,9 +72,11 @@
 .entry .field_controller span:hover { opacity: 1; }
 
 .entry.number { width: 60px; }
-.entry.number textarea { width: 27px; }
+.entry.number textarea { width: 38px; position: relative }
 .entry.number .field_controller { width: 20px; }
+
 .entry.block { width: 200px; }
 .entry textarea.block { width: 200px; text-align: left; }
 .entry.block.open { overflow: visible; }
 .entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }
+
