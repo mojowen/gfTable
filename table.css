@@ -2,6 +2,7 @@
 	border-bottom: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 	width: 450px;
+	height: 400px;
 	overflow: hidden;
 }
 .header {
@@ -26,6 +27,7 @@
 	overflow-y: auto;
 	overflow-x: visible;
 }
+
 .row {
 	border: 0;
 	margin: 0;
@@ -36,9 +38,17 @@
 	border-right: 1px solid #ddd;
 	padding: 4px;
 	width: 100px;
-	height: 20px;
+	height: 30px;
 	float: left;
 	overflow: hidden;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
+}
+.entry textarea {
+	border: none;
+	height: 20px;
+	resize: none;
+	text-align: center;
+	width: 60px;
+	float: left;
 }
