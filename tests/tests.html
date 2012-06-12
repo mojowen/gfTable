@@ -57,6 +57,40 @@ $q(document).ready( function() {
 			equal(observable(),'Not', 'Handles non-numbers');
 		})
 
+		module('Block testing', {
+			setup: function() {
+				$cell = $('.body .entry.block:eq('+Math.floor( $('.body .entry.block').length*Math.random() - 1 )+')'),
+				ctx = ko.contextFor($cell[0]),
+				observable = ctx.$parent[ctx.$data.name],
+				value = observable()
+			},
+			teardown: function() { observable(value); $cell = null, ctx = null, observable = null, value = null }
+		});
+		test('Bindings', 2, function() {
+			$('textarea', $cell).focus()
+			ok($( $cell).hasClass('open'), '')
+			var height = $('textarea', $cell).height()
+			$('textarea',$cell).val( $('textarea',$cell).val() + "\n"+"\n").focus()
+			notEqual(height, $($cell).find('textarea').height(), 'Height increases with line breaks');
+		})
+
+		module('Select testing', {
+			setup: function() {
+				$cell = $('.body .entry.block:eq('+Math.floor( $('.body .entry.block').length*Math.random() - 1 )+')'),
+				ctx = ko.contextFor($cell[0]),
+				observable = ctx.$parent[ctx.$data.name],
+				value = observable()
+			},
+			teardown: function() { observable(value); $cell = null, ctx = null, observable = null, value = null }
+		});
+		test('Bindings', 2, function() {
+			$('textarea', $cell).focus()
+			ok($( $cell).hasClass('open'), '')
+			var height = $('textarea', $cell).height()
+			$('textarea',$cell).val( $('textarea',$cell).val() + "\n"+"\n").focus()
+			notEqual(height, $($cell).find('textarea').height(), 'Height increases with line breaks');
+		})
+
 
 
 	});
