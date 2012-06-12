@@ -67,3 +67,7 @@
 .entry.number { width: 60px; }
 .entry.number textarea { width: 27px; }
 .entry.number .field_controller { width: 20px; }
+.entry.block { width: 200px; }
+.entry textarea.block { width: 200px; text-align: left; }
+.entry.block.open { overflow: visible; }
+.entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }

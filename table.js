@@ -62,7 +62,16 @@ tableModel = function(rows, fields) {
 	this.__templates['number'] = '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\'"></textarea>'+
 	'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
 	
-	
+
+	// Block
+	$(document).on({
+		focusin: function(e) { $(this).elastic().parent().addClass('open') },
+		focusout:function(e) { $(this).parent().removeClass('open') } 
+	},'.block textarea')
+	this.__widths['block'] = 200;
+	this.__templates['block'] = '<textarea data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\', elastic: true" class="block data"></textarea>'
+	'<div class="block_controls field_controller"><em>Shift + Enter for line break</em</div>';
+
 	return this;
 }
 	
