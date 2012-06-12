@@ -54,3 +54,16 @@ tableModel = function(rows, fields) {
 		other.template = {name: template }
 	}}
 
+	// Useful functions for increasing 
+
+	// Number Bindings
+	$(document).on('click','.number_controls span', function(e) { 
+		var ctx = ko.contextFor(this), observable = ctx.$parent[ ctx.$data.name ], value = observable(), amount = $(this).hasClass('numberUp') ? 1 : -1
+		if( isNaN(parseInt(value)) ) return false;
+		observable(value+amount); 
+		e.preventDefault(); 
+	})
+	
+	return this;
+}
+	

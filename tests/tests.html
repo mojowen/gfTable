@@ -36,6 +36,31 @@ $q(document).ready( function() {
 			setTimeout( function() { equal( $('.body .row').length, 40,'Vertical lazy load works'); start() }, 1)
 			
 		})
+		module('Number testing', {
+			setup: function() {
+				$cell = $('.body .entry.number:eq('+Math.floor( $('.body .entry.number').length*Math.random() - 1 )+')'),
+				ctx = ko.contextFor($cell[0]),
+				observable = ctx.$parent[ctx.$data.name],
+				value = observable()
+			},
+			teardown: function() { observable(value); $cell = null, ctx = null, observable = null, value = null }
+		});
+		test('CSS and rendering checks out', 2, function() {
+			ok($('.field_controls',$cell), 'Has field controls');
+			ok($('textarea',$cell).hasClass('number'), 'Has correct class');
+		});
+		test('Bindings', 3, function() {
+			$('.numberUp', $cell).click()
+			equal(value+1, observable(), 'Value is increased by one');
+			$('.numberDown', $cell).click()
+			equal(value, observable(), 'Value is decreases by one');
+			observable('Not')
+			$('.numberDown', $cell).click()
+			equal(observable(),'Not', 'Handles non-numbers');
+		})
+
+
+
 	});
 });
 </script>
