@@ -124,6 +124,22 @@ tableModel = function(rows, fields) {
 	this.__templates['date'] = '<textarea data-bind="value: $parent[$data.'+tableOptions.field.data+'], valueUpdate: \'afterkeydown\', elastic: true" class="date"></textarea>'+
 		'<div class="block_controls date_controller"></div>';
 
+	// Suggest
+	$(document).on({
+		focusin: function() {
+			var ctx = ko.contextFor(this)
+			$(this).autocomplete({
+				source: ko.utils.arrayGetDistinctValues( ctx.$root.rows().map( function(elem) { return elem[ ctx.$data[tableOptions.field.data] ]() } )),
+				appendTo: $(this).parents('.inner')
+			});
+		},
+		focusout: function() {
+			if( $('.ui-autocomplete').is(':hidden') ) { $(this).autocomplete('destroy'); }
+		}
+	},'.suggest textarea')
+
+	this.__templates['suggest'] = '<textarea class="suggest data " data-bind="value: $parent[$data.'+tableOptions.field.data+']"></textarea>';
+
 
 
 

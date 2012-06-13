@@ -111,6 +111,7 @@ button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 
 .ui-widget-header a.ui-multiselect-close { float: right; text-decoration: none; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333; }
 .ui-widget-header a.ui-multiselect-close:hover { opacity: 1 }
 .ui-multiselect-menu .ui-state-hover span { opacity: 1; font-weight: bold }
+.ui-multiselect-menu .ui-state-active span { font-weight: bold }
 
 .entry.date {width: 140px;}
 .entry.date textarea {width: 110px;}
@@ -149,3 +150,21 @@ button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 
 .ui-datepicker-calendar td.ui-datepicker-current-day { border: 1px dashed #333; }
 .hasDatepicker .close { float: right; margin: -30px 0 0 0; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333 }
 .hasDatepicker .close:hover { opacity: 1; }
+
+
+ul.ui-autocomplete {
+	background-color: #fff;
+	list-style: square;
+	padding: 0 20px 0 0;
+	border: 2px solid #ddd;
+	width: 100px;
+	padding: 4px 0 14px 30px;
+	max-height: 100px;
+	overflow-y: auto;
+	font-size: 10px;
+	overflow-x: hidden;
+}
+
+ul.ui-autocomplete li.ui-menu-item { cursor: pointer; opacity: 0.6; padding: 4px 0 4px; }
+ul.ui-autocomplete li.ui-menu-item a { 	color: #000; cursor: pointer; opacity: 0.6; }
+ul.ui-autocomplete li.ui-menu-item a.ui-state-hover { opacity: 1; font-weight: bold }
