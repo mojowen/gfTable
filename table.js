@@ -1,14 +1,26 @@
 tableModel = function(rows, fields) {
+	var tableOptions = {
+		field: {
+			name: 'name',
+			data: 'name',
+			options: 'options',
+			type: 'type'
+		},
+		ender: 50
+	}
+	
+	// Templates
 	this.__templates = {
-		table: '<div class="header"><div class="inner" data-bind="style: { width: (fields.__width()+20)+\'px\' }, template: { name: \'header\', foreach: fields() }"><div class="ender"></div></div></div>'+
+		table: '<div class="header"><div class="inner" data-bind="style: { width: (fields.__width()+'+tableOptions.ender+')+\'px\' }, template: { name: \'header\', foreach: fields() }"><div class="ender" style="width: '+tableOptions.ender+'px"></div></div></div>'+
 			'<div class="body" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: fields.__width()+\'px\' }" ></div></div>',
-		header: '<div class="title entry" data-bind="text: $data.name, setClass: $data.type"></div>',
+		header: '<div class="title entry" data-bind="text: $data.'+tableOptions.field.name+', setClass: $data.'+tableOptions.field.type+'"></div>',
 		row: '<div class="row" data-bind="template: {name: \'entry\', foreach: $parent.fields() }"></div>',
-		entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setClass: $data.type"></div>',
-		text: '<textarea data-bind="value: $parent[$data.name]"></textarea>'
+		entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setClass: $data.'+tableOptions.field.type+'"></div>',
+		text: '<textarea data-bind="value: $parent[$data.'+tableOptions.field.data+']"></textarea>'
 	}
 	this.__widths = {}
-
+	
+	// Rows
 	this.rows = ko.observableArray(rows)
 	this.rows.__base = ko.observable(20)
 	this.rows.__more = ko.computed( function() { return this.rows.__base() <= this.rows().length },this)
@@ -18,16 +30,8 @@ tableModel = function(rows, fields) {
 		
 	},this)
 
+	// Fields
 	this.fields = ko.observableArray(fields)
-	this.fields.__width = ko.computed(function() { 
-		var width = 0, fields = this.fields()
-		for (var i=0; i < fields.length; i++) {
-			if( typeof this.__widths[ fields[i].type ] == 'undefined' ) width += 100
-			else width += this.__widths[ fields[i].type ]
-			width += 4
-		};
-		return width
-	},this)
 
 
 	ko.bindingHandlers.fillTable = {  init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -48,7 +52,7 @@ tableModel = function(rows, fields) {
 			field = options.field
 			other = allBindingsAccessor(),
 			ctx = bindingContext,
-			template = typeof ctx.$root.__templates[field.type] != 'undefined' ? field.type : 'text'
+			template = typeof ctx.$root.__templates[ field[tableOptions.field.type] ] != 'undefined' ? field[tableOptions.field.type] : 'text'
 		other.template = {name: template }
 	}}
 
@@ -56,13 +60,13 @@ tableModel = function(rows, fields) {
 
 	// Number
 	$(document).on('click','.number_controls span', function(e) { 
-		var ctx = ko.contextFor(this), observable = ctx.$parent[ ctx.$data.name ], value = observable(), amount = $(this).hasClass('numberUp') ? 1 : -1
+		var ctx = ko.contextFor(this), observable = ctx.$parent[ ctx.$data[tableOptions.field.data] ], value = observable(), amount = $(this).hasClass('numberUp') ? 1 : -1
 		if( isNaN(parseInt(value)) ) return false;
 		observable(value+amount); 
 		e.preventDefault(); 
 	});
-	this.__widths = 60;
-	this.__templates['number'] = '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\'"></textarea>'+
+	this.__widths['number'] = 60;
+	this.__templates['number'] = '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.'+tableOptions.field.data+'], valueUpdate: \'afterkeydown\'"></textarea>'+
 	'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
 
 	// Block
@@ -71,10 +75,10 @@ tableModel = function(rows, fields) {
 		focusout:function(e) { $(this).parent().removeClass('open') } 
 	},'.block textarea')
 	this.__widths['block'] = 200;
-	this.__templates['block'] = '<textarea data-bind="value: $parent[$data.name], valueUpdate: \'afterkeydown\', elastic: true" class="block data"></textarea>'
-	'<div class="block_controls field_controller"><em>Shift + Enter for line break</em</div>';
+	this.__templates['block'] = '<textarea data-bind="value: $parent[$data.'+tableOptions.field.data+'], valueUpdate: \'afterkeydown\', elastic: true" class="block"></textarea>';
 
-	// Select
+	
+	// Options used for multiselect and select
 	function multiselect() { return { 
 		header: '<li class="other"><a class="ui-multiselect-all" href="#"><span>+ Check all</span></a></li><li class="other"><a class="ui-multiselect-none" href="#"><span>- Uncheck all</span></a></li>',
 		selectedList: 1, 
