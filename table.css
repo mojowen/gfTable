@@ -44,6 +44,7 @@
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
+.entry.open { overflow: visible; }
 .entry textarea {
 	border: none;
 	height: 28px;
@@ -73,8 +74,8 @@
 .entry .field_controller span:hover { opacity: 1; }
 
 .entry.number { width: 60px; }
-.entry.number textarea { width: 38px; position: relative }
-.entry.number .field_controller { width: 20px; }
+.entry.number textarea { width: 35px; position: relative }
+.entry.number .field_controller { width: 23px; }
 
 .entry.block { width: 200px; }
 .entry textarea.block { width: 200px; text-align: left; }
