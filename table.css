@@ -81,13 +81,15 @@
 .entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }
 
 
+
+.entry.multiselect, .entry.select { width: 120px; padding:0; text-align: center; }
 .ui-multiselect-menu { 
 	display: none; 
 	position: relative; 
 	top: 0; 
 	left: 0; 
 	width: auto !important;
-	max-width: 160px;
+	max-width: 120px;
 	height: 150px;
 	overflow: auto; 
 	background-color: #fff; 
@@ -96,13 +98,16 @@
 	z-index: 10;
 }
 .ui-multiselect-menu input, .ui-multiselect-menu span, .ui-multiselect-menu label { font-size: 11px; }
-button.trigger, button.ui-multiselect { width: 80px; color: #747474 }
+button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 auto }
 .ui-multiselect.ui-state-active { color: #622; font-weight: bold }
-.ui-multiselect-menu ul {  list-style: none; margin: 0 0 0 -4px; padding: 0 0 0 10px; text-align: left }
+.ui-multiselect-menu ul {  list-style: none; margin: 0; padding: 0 0 0 2px; text-align: left }
 .ui-multiselect-menu ul li { margin: 4px 0 }
-.ui-multiselect-menu ul li span { padding: 0 6px }
+.ui-multiselect-menu ul li span { padding: 0; opacity: 0.65 }
 .ui-widget-header ul { margin: 0; font-size: 8px; padding: 0 }
-.ui-widget-header ul li {  margin: 2px 0; padding: 0 }
-.ui-widget-header ul li.other {  margin: 2px 0; padding: 0 }
-.ui-widget-header a.ui-multiselect-close :before { content: 'X '; }
-.ui-widget-header a.ui-multiselect-close :after { content: 'Close'; }
+.ui-widget-header ul li { margin: -30px 4px 36px 0; padding: 0 }
+.ui-widget-header ul li.other {  margin: 2px 0 0 8px; padding: 0 }
+.ui-widget-header a.ui-multiselect-close :before { content: 'x'; }
+.ui-widget-header a.ui-multiselect-close { float: right; text-decoration: none; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333; }
+.ui-widget-header a.ui-multiselect-close:hover { opacity: 1 }
+.ui-multiselect-menu .ui-state-hover span { opacity: 1; font-weight: bold }
+.ui-multiselect-menu .ui-state-active span { font-weight: bold }
