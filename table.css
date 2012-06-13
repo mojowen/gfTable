@@ -61,21 +61,20 @@
 .entry textarea:focus {
 	border: 2px solid #333; 
 }
-.entry .field_controller {
-	float: right;
-	padding: 4px 0;
+.entry .field_controller > * {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-o-user-select: none;
 	user-select: none;
 }
-.entry .field_controller span { cursor: pointer; opacity: 0.4; }
-.entry .field_controller span:hover { opacity: 1; }
 
 .entry.number { width: 60px; }
 .entry.number textarea { width: 35px; position: relative }
-.entry.number .field_controller { width: 23px; }
+.entry.number .number_controller { width: 23px; float: right; padding: 4px 0; }
+.entry .number_controller span { cursor: pointer; opacity: 0.4; }
+.entry .number_controller span:hover { opacity: 1; }
+
 
 .entry.block { width: 200px; }
 .entry textarea.block { width: 200px; text-align: left; }
@@ -168,6 +167,7 @@ ul.ui-autocomplete {
 ul.ui-autocomplete li.ui-menu-item { cursor: pointer; opacity: 0.6; padding: 4px 0 4px; }
 ul.ui-autocomplete li.ui-menu-item a { 	color: #000; cursor: pointer; opacity: 0.6; }
 ul.ui-autocomplete li.ui-menu-item a.ui-state-hover { opacity: 1; font-weight: bold }
+
 
 .entry.array { width: 160px; padding: 0 }
 .entry.array .array { 
