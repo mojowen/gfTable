@@ -87,6 +87,7 @@ tableModel = function(rows, fields) {
 		height: 'auto',
 		autoOpen: true
 	}};
+	// Select
 	$(document).on({
 		click: function(e) {
 			var options = new multiselect(),
@@ -97,8 +98,22 @@ tableModel = function(rows, fields) {
 		}
 	},'.select button.trigger')
 	this.__widths['select'] = 120;
-	this.__templates['select'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.name] "></button>'+
-		'<select style="display: none;"  data-bind="betterSelect: true, value: $parent[$data.name], options: $data.options, optionsCaption: \'--\'" class="data select"></select>';
+	this.__templates['select'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.'+tableOptions.field.data+']() == undefined ? \'--\' : $parent[$data.'+tableOptions.field.data+']() "></button>'+
+		'<select style="display: none;"  data-bind="betterSelect: true, value: $parent[$data.'+tableOptions.field.data+'], options: $data.'+tableOptions.field.options+', optionsCaption: \'--\'" class="select"></select>';
+
+	// Multiselect
+	$(document).on({
+		click: function(e) {
+			var options = new multiselect(),
+				$element = $(this).hide().next('select')
+			options.appendTo = $element.parents('.body')
+			$element.multiselect(options)
+		}
+	},'.multiselect button.trigger')
+	this.__widths['multiselect'] = 120;
+	this.__templates['multiselect'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.'+tableOptions.field.data+']().length > 1 ? $parent[$data.'+tableOptions.field.data+']().length+\' selected\' : $parent[$data.'+tableOptions.field.data+']()[0] "></button>'+
+		'<select style="display: none;" multiple="true" data-bind="betterSelect: true, selectedOptions: $parent[$data.'+tableOptions.field.data+'], options: $data.'+tableOptions.field.options+'" class="multiselect"></select>';
+
 
 
 
