@@ -62,7 +62,12 @@
 					makeString(Math.floor(Math.random()*20+10))
 				].join("\n") ),
 			date: ko.observable( (function() { var d = new Date('1/1/11'); d.setDate(i+1); return d.toDateString() })() ),
-			number: ko.observable(Math.round(Math.random()*10) )
+			number: ko.observable(Math.round(Math.random()*10) ),
+			array: ko.observable( [
+					[null,'Bus Trips'][Math.floor( Math.random()*2)],
+					[null,'Trick or Vote'][Math.floor( Math.random()*2) ],
+					[null,'Raves',][Math.floor( Math.random()*2) ]
+				].filter( function(el) { return el != null }) ),
 		});
 
 		var grid = new tableModel(_rows, _fields);

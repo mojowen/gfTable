@@ -13,6 +13,9 @@ ko.utils.extend(ko.templateSources.stringTemplate.prototype, {
 	text: function(value) {
 		if (arguments.length === 0) return this.templates[this.templateName]; 
 		this.templates[this.templateName] = value;   
+	},
+	foreach: function(value) {
+		return '...'
 	}
 });
 

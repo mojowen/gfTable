@@ -67,7 +67,7 @@ tableModel = function(rows, fields) {
 	});
 	this.__widths['number'] = 60;
 	this.__templates['number'] = '<textarea class="number has_controls data" wrap="off" data-bind="value: $parent[$data.'+tableOptions.field.data+'], valueUpdate: \'afterkeydown\'"></textarea>'+
-	'<div class="number_controls field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
+	'<div class="number_controller field_controller"><span amount="1" class="numberUp">&#x2191;</span><span amount="-1" class="numberDown">&#x2193;</span></div>';
 
 	// Block
 	$(document).on({
@@ -98,7 +98,7 @@ tableModel = function(rows, fields) {
 		}
 	},'.select button.trigger')
 	this.__widths['select'] = 120;
-	this.__templates['select'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.'+tableOptions.field.data+']() == undefined ? \'--\' : $parent[$data.'+tableOptions.field.data+']() "></button>'+
+	this.__templates['select'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: !$parent[$data.'+tableOptions.field.data+']  ? \'--\' : $parent[$data.'+tableOptions.field.data+']() == null ? \'--\' : $parent[$data.'+tableOptions.field.data+']"></button>'+
 		'<select style="display: none;"  data-bind="betterSelect: true, value: $parent[$data.'+tableOptions.field.data+'], options: $data.'+tableOptions.field.options+', optionsCaption: \'--\'" class="select"></select>';
 
 	// Multiselect
@@ -111,7 +111,7 @@ tableModel = function(rows, fields) {
 		}
 	},'.multiselect button.trigger')
 	this.__widths['multiselect'] = 120;
-	this.__templates['multiselect'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.'+tableOptions.field.data+']().length > 1 ? $parent[$data.'+tableOptions.field.data+']().length+\' selected\' : $parent[$data.'+tableOptions.field.data+']()[0] "></button>'+
+	this.__templates['multiselect'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: !$parent[$data.'+tableOptions.field.data+'] ? \'Select Options\' : $parent[$data.'+tableOptions.field.data+']().length > 1 ? $parent[$data.'+tableOptions.field.data+']().length+\' selected\' : $parent[$data.'+tableOptions.field.data+'] "></button>'+
 		'<select style="display: none;" multiple="true" data-bind="betterSelect: true, selectedOptions: $parent[$data.'+tableOptions.field.data+'], options: $data.'+tableOptions.field.options+'" class="multiselect"></select>';
 
 	// Date
@@ -122,7 +122,7 @@ tableModel = function(rows, fields) {
 
 	this.__widths['date'] = 140;
 	this.__templates['date'] = '<textarea data-bind="value: $parent[$data.'+tableOptions.field.data+'], valueUpdate: \'afterkeydown\', elastic: true" class="date"></textarea>'+
-		'<div class="block_controls date_controller"></div>';
+		'<div class="field_controller date_controller"></div>';
 
 	// Suggest
 	$(document).on({
@@ -137,8 +137,24 @@ tableModel = function(rows, fields) {
 			if( $('.ui-autocomplete').is(':hidden') ) { $(this).autocomplete('destroy'); }
 		}
 	},'.suggest textarea')
-
 	this.__templates['suggest'] = '<textarea class="suggest data " data-bind="value: $parent[$data.'+tableOptions.field.data+']"></textarea>';
+
+	// Array
+	$(document).on({
+		click: function(e) {
+			var $this = $(this).addClass('open')
+			$(document).bind('mousedown.array', function(e) {
+				if( !$.contains( $this[0], e.target) && e.target !== $this[0] && !$(e.target).is($this) ||  $(e.target).is('.close') ) {
+					$this.removeClass('open')
+				}
+				$(this).unbind('mousedown.array');
+			});
+			
+		} 
+	},'.entry.array')
+	this.__widths['array'] = 160;
+	this.__templates['array'] = '<div class="array" data-bind="template: { foreach: $parent[$data.'+tableOptions.field.data+'], name:\'arrayItem\'}"><div style="clear:both;"></div></div>';
+	this.__templates['arrayItem'] = '<a data-bind="text:  $data.text ? $data.text : $data , attr: { href: $data.link  }"></a>';
 
 
 
@@ -153,5 +169,4 @@ tableModel = function(rows, fields) {
 		return width
 	},this)
 
-	return this;
 }

@@ -168,3 +168,19 @@ ul.ui-autocomplete {
 ul.ui-autocomplete li.ui-menu-item { cursor: pointer; opacity: 0.6; padding: 4px 0 4px; }
 ul.ui-autocomplete li.ui-menu-item a { 	color: #000; cursor: pointer; opacity: 0.6; }
 ul.ui-autocomplete li.ui-menu-item a.ui-state-hover { opacity: 1; font-weight: bold }
+
+.entry.array { width: 160px; padding: 0 }
+.entry.array .array { 
+	min-height: 31px;
+	width: 160px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: auto; 
+	padding: 4px 4px 0;
+	font-size: 10px;
+	background-color: #fff;
+	position: relative;
+}
+.entry.array.open .array { border: 2px solid #ddd; z-index: 10; margin: -1px 0 0 -1px; width: 161px }
+.entry.array .array a { white-space: nowrap; float: left; text-decoration: none; background-color: #622; border-radius: 4px; cursor: pointer; padding: 1px 4px 2px; margin: 2px; color: #fff; }
+.entry.array .array a:hover { background-color: #226; }
