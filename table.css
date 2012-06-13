@@ -79,7 +79,6 @@
 
 .entry.block { width: 200px; }
 .entry textarea.block { width: 200px; text-align: left; }
-.entry.block.open { overflow: visible; }
 .entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }
 
 
@@ -112,4 +111,3 @@ button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 
 .ui-widget-header a.ui-multiselect-close { float: right; text-decoration: none; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333; }
 .ui-widget-header a.ui-multiselect-close:hover { opacity: 1 }
 .ui-multiselect-menu .ui-state-hover span { opacity: 1; font-weight: bold }
-.ui-multiselect-menu .ui-state-active span { font-weight: bold }

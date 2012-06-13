@@ -101,6 +101,17 @@ tableModel = function(rows, fields) {
 		'<select style="display: none;"  data-bind="betterSelect: true, value: $parent[$data.name], options: $data.options, optionsCaption: \'--\'" class="data select"></select>';
 
 
+
+
+	this.fields.__width = ko.computed(function() { 
+		var width = 0, fields = this.fields()
+		for (var i=0; i < fields.length; i++) {
+			if( typeof this.__widths[ fields[i][ tableOptions.field.type] ] == 'undefined' ) width += 100
+			else width += this.__widths[ fields[i][ tableOptions.field.type] ]
+			width += 4
+		};
+		return width
+	},this)
+
 	return this;
 }
-	
