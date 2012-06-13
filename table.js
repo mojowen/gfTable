@@ -114,6 +114,15 @@ tableModel = function(rows, fields) {
 	this.__templates['multiselect'] = '<button type="button" class="ui-multiselect trigger" aria-haspopup="true" tabindex="0" data-bind="text: $parent[$data.'+tableOptions.field.data+']().length > 1 ? $parent[$data.'+tableOptions.field.data+']().length+\' selected\' : $parent[$data.'+tableOptions.field.data+']()[0] "></button>'+
 		'<select style="display: none;" multiple="true" data-bind="betterSelect: true, selectedOptions: $parent[$data.'+tableOptions.field.data+'], options: $data.'+tableOptions.field.options+'" class="multiselect"></select>';
 
+	// Date
+	$(document).on({
+		click: function(e) { var ctx = ko.contextFor(this); $(this).dateMaker( ctx.$parent[ ctx.$data[tableOptions.field.data] ] ).parent().addClass('open') },
+		focus: function(e) { var ctx = ko.contextFor(this); $(this).dateMaker( ctx.$parent[ ctx.$data[tableOptions.field.data] ] ).parent().addClass('open') }
+	},'.date:not(.open) textarea, .date:not(.open) .date_controller')
+
+	this.__widths['date'] = 140;
+	this.__templates['date'] = '<textarea data-bind="value: $parent[$data.'+tableOptions.field.data+'], valueUpdate: \'afterkeydown\', elastic: true" class="date"></textarea>'+
+		'<div class="block_controls date_controller"></div>';
 
 
 
