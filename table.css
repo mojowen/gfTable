@@ -99,7 +99,7 @@
 	z-index: 10;
 }
 .ui-multiselect-menu input, .ui-multiselect-menu span, .ui-multiselect-menu label { font-size: 11px; }
-button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 auto }
+button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 auto; height: 18px; }
 .ui-multiselect.ui-state-active { color: #622; font-weight: bold }
 .ui-multiselect-menu ul {  list-style: none; margin: 0; padding: 0 0 0 2px; text-align: left }
 .ui-multiselect-menu ul li { margin: 4px 0 }
