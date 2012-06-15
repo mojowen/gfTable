@@ -15,6 +15,7 @@
 	<script src="lib/lib.js" type="text/javascript" charset="utf-8"></script>
 	<script src="lib/factories.js" type="text/javascript" charset="utf-8"></script>
 	<script src="table.js" type="text/javascript" charset="utf-8"></script>
+	<script src="templates.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="table.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	
 	<style type="text/css" media="screen">
@@ -29,9 +30,7 @@
 
 	<script type="text/javascript" charset="utf-8">
 		var grid = new tableModel(_rows, _fields);
-		ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), grid.__templates));
-		ko.applyBindings( grid );
-
+		grid.bind();
 	</script>
 </body>
 </html>
