@@ -12,6 +12,8 @@ $q = jQuery.noConflict(true),
 	jQuery = null,
 	ko = null
 	grid = null
+	$cell = null,
+	observable = null
 $q(document).ready( function() { 
 	$q('#myframe').load(function(){
 
@@ -57,16 +59,13 @@ $q(document).ready( function() {
 			equal(observable(),'Not', 'Handles non-numbers');
 		})
 
-		module('Block testing', {
-			setup: function() {
-				$cell = $('.body .entry.block:eq('+Math.floor( $('.body .entry.block').length*Math.random() - 1 )+')'),
-				ctx = ko.contextFor($cell[0]),
-				observable = ctx.$parent[ctx.$data.name],
-				value = observable()
-			},
-			teardown: function() { observable(value); $cell = null, ctx = null, observable = null, value = null }
-		});
+		module('Block testing')
 		test('Bindings', 2, function() {
+			$cell = $('.body .entry.block:eq('+Math.floor( $('.body .entry.block').length*Math.random() - 1 )+')'),
+			ctx = ko.contextFor($cell[0]),
+			observable = ctx.$parent[ctx.$data.name],
+			value = observable();
+
 			$('textarea', $cell).focus()
 			ok($( $cell).hasClass('open'), '')
 			var height = $('textarea', $cell).height()
@@ -74,22 +73,31 @@ $q(document).ready( function() {
 			notEqual(height, $($cell).find('textarea').height(), 'Height increases with line breaks');
 		})
 
-		module('Select testing', {
-			setup: function() {
-				$cell = $('.body .entry.block:eq('+Math.floor( $('.body .entry.block').length*Math.random() - 1 )+')'),
-				ctx = ko.contextFor($cell[0]),
-				observable = ctx.$parent[ctx.$data.name],
-				value = observable()
-			},
-			teardown: function() { observable(value); $cell = null, ctx = null, observable = null, value = null }
+		module('Select testing')
+		test('Renders and triggers', 4, function() {
+			$cell = $('.body .entry.select:eq('+Math.floor( $('.body .entry.select').length*Math.random() - 1 )+')'),
+			ctx = ko.contextFor($cell[0]),
+			observable = ctx.$parent[ctx.$data.name],
+			value = observable()
+
+			ok($('button.trigger',$cell), 'Has fake button');
+			ok($('select',$cell).is(':hidden'), 'Has hidden select');
+			$('button',$cell).click()
+			ok($('button.trigger',$cell).is(':hidden'), 'Fake button hidden');
+			ok($('button.ui-multiselect.ui-widget',$cell).is(':visible'), 'Has hidden select');
 		});
-		test('Bindings', 2, function() {
-			$('textarea', $cell).focus()
-			ok($( $cell).hasClass('open'), '')
-			var height = $('textarea', $cell).height()
-			$('textarea',$cell).val( $('textarea',$cell).val() + "\n"+"\n").focus()
-			notEqual(height, $($cell).find('textarea').height(), 'Height increases with line breaks');
-		})
+		// test('Binding and KO Interactions', 1, function() {
+		// 	$cell = $('.body .entry.select:eq('+Math.floor( $('.body .entry.select').length*Math.random() - 1 )+')'),
+		// 	ctx = ko.contextFor($cell[0]),
+		// 	observable = ctx.$parent[ctx.$data.name],
+		// 	value = observable()
+		// 
+		// 	$('.button',$cell).click()
+		// 
+		// 	$first = $('input#ui-multiselect-0-option-1').attr('checked',true).click()
+		// 
+		// 	equal(observable(), $first.prev('label').text(), 'Select fires and changes are passed to the observable');
+		// })
 
 
 
