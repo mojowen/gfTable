@@ -1,4 +1,4 @@
-Go Fight ... Table
+Go Fight Table
 ===
 
 gfTable is a flexible table binding built on Knockout JS and jQuery.
@@ -9,7 +9,7 @@ To use it:
  * Add table.js
  * Add ` <div class="table" data-bind="template: {name: 'table', with: grid } "></div> ` to your document
  * Make two arrays, rows and fields, and pass them to a new tableModel and then bind the document... like so: `	var grid = new tableModel(_rows, _fields); grid.bind(); `
- * See /lib/factories.js for what these might look like
- * See templates.js for how to add row templates
+ * See /lib/factories.js for what these row and field arrays might look like
+ * See templates.js for how to add row templates with the `tableModel.__addTemplate(name, template, _width_)` method
 
 Work in progress...
