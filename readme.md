@@ -1,7 +1,7 @@
 Go Fight Table
 ===
 
-gfTable is a flexible table binding built on Knockout JS and jQuery. Originally built for use in @mojowen/go-fight-win but can operate in any project you want a flexible table system.
+gfTable is a flexible table binding built on Knockout JS and jQuery. Originally built for use in [Go Fight Win](https://github.com/mojowen/Go-Fight-Win) but can operate in any project you want a flexible table system.
 
 To use it:
 
