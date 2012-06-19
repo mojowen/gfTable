@@ -11,12 +11,13 @@ tableModel = function(rows, fields, options) {
 	
 	// Templates
 	this.__templates = ko.observable({
-		table: '<div class="header"><div class="inner" data-bind="style: { width: (fields.__width()+'+this.__options.ender+')+\'px\' }, template: { name: \'header\', foreach: fields() }"><div class="ender" style="width: '+this.__options.ender+'px"></div></div></div>'+
-			'<div class="body" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: fields.__width()+\'px\' }" ></div></div>',
-		header: '<div class="title entry" data-bind="text: $data.'+this.__options.field.name+', setTemplateClass: $data.'+this.__options.field.type+'"></div>',
 		row: '<div class="row" data-bind="template: {name: \'entry\', foreach: $parent.fields() }"></div>',
-		entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setTemplateClass: $data.'+this.__options.field.type+'"></div>',
-		text: '<textarea data-bind="value: $parent[$data.'+this.__options.field.data+']"></textarea>'
+		gfTable: '<div class="header gfTable"><div class="inner" data-bind="style: { width: ( $data.fields.__width()+'+this.__options.ender+')+\'px\' }, template: { name: \'gfT_header\', foreach: fields() }"><div class="ender" style="width: '+this.__options.ender+'px"></div></div></div>'+
+			'<div class="body gfTable" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'gfT_row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: $data.fields.__width()+\'px\' }" ></div></div>',
+		gfT_header: '<div class="title entry" data-bind="text: $data.'+this.__options.field.name+', setTemplateClass: $data.'+this.__options.field.type+'"></div>',
+		gfT_row: '<div class="row" data-bind="template: {name: \'gfT_entry\', foreach: $parent.fields() }"></div>',
+		gfT_entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setTemplateClass: $data.'+this.__options.field.type+'"></div>',
+		gfT_text: '<textarea data-bind="value: $parent[$data.'+this.__options.field.data+'], valueUpdate: \'afterkeydown\'"></textarea>'
 	})
 	this.__widths = ko.observable({})
 	
@@ -73,9 +74,17 @@ tableModel = function(rows, fields, options) {
 			}
 		});
 
+		var __templates = this.__templates()
 		//modify an existing templateEngine to work with string templates
 		function createStringTemplateEngine(templateEngine, templates) {
-			templateEngine.makeTemplateSource = function(template) { return new ko.templateSources.stringTemplate(template, templates); }   
+
+			templateEngine.makeTemplateSource = function(template) {
+				var elem = document.getElementById(template);
+				if( elem ) return new ko.templateSources.domElement(elem); // Checks and makes sure it doesn't exist in the Dom
+				else if ((template.nodeType == 1) || (template.nodeType == 8)) return new ko.templateSources.anonymousTemplate(template); // Can still render anonymous templates
+				else if ( __templates[template] != 'undefined' ) return new ko.templateSources.stringTemplate(template, templates); // If not, renders it out using our templating system
+				else throw new Error("Unknown template type: " + template);
+			}   
 			return templateEngine;
 		}
 
@@ -111,7 +120,7 @@ tableModel = function(rows, fields, options) {
 				field = options.field
 				other = allBindingsAccessor(),
 				ctx = bindingContext,
-				template = typeof ctx.$root.__templates()[ field[bindingContext.$root.__options.field.type] ] != 'undefined' ? field[ bindingContext.$root.__options.field.type] : 'text'
+				template = typeof ctx.$root.__templates()[ field[bindingContext.$root.__options.field.type] ] != 'undefined' ? field[ bindingContext.$root.__options.field.type] : 'gfT_text'
 			other.template = {name: template }
 		}
 	}
