@@ -6,13 +6,16 @@ tableModel = function(rows, fields, options) {
 			options: 'options',
 			type: 'type'
 		},
-		ender:  50
+		widths: {
+			ender:  50,
+			field: 100
+		}
 	}
 	
 	// Templates
 	this.__templates = ko.observable({
-		gfTable: '<div class="header gfTable"><div class="inner" data-bind="style: { width: ( $data.fields.__width()+'+this.__options.ender+')+\'px\' }, template: { name: \'gfT_header\', foreach: fields() }"><div class="ender" style="width: '+this.__options.ender+'px"></div></div></div>'+
-			'<div class="body gfTable" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'gfT_row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: $data.fields.__width()+\'px\' }" ></div></div>',
+		gfTable: '<div class="header"><div class="inner" data-bind="style: { width: ( $data.fields.__width()+'+this.__options.widths.ender+')+\'px\' }, template: { name: \'gfT_header\', foreach: fields() }"><div class="ender" style="width: '+this.__options.widths.ender+'px"></div></div></div>'+
+			'<div class="body" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'gfT_row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: $data.fields.__width()+\'px\' }" ></div></div>',
 		gfT_header: '<div class="title entry" data-bind="text: $data.'+this.__options.field.name+', setTemplateClass: $data.'+this.__options.field.type+'"></div>',
 		gfT_row: '<div class="row" data-bind="template: {name: \'gfT_entry\', foreach: $parent.fields() }"></div>',
 		gfT_entry: '<div class="entry" data-bind="entryTemplate: {field: $data, row: $parent }, setTemplateClass: $data.'+this.__options.field.type+'"></div>',
@@ -35,7 +38,7 @@ tableModel = function(rows, fields, options) {
 	this.fields.__width = ko.computed(function() { 
 		var width = 0, fields = this.fields(), widths = this.__widths()
 		for (var i=0; i < fields.length; i++) {
-			if( typeof widths[ fields[i][ this.__options.field.type] ] == 'undefined' ) width += 100
+			if( typeof widths[ fields[i][ this.__options.field.type] ] == 'undefined' ) width += this.__options.widths.field
 			else width += widths[ fields[i][ this.__options.field.type] ]
 			width += 4
 		};
