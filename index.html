@@ -26,11 +26,11 @@
 </head>
 <body>
 
-	<div class="table" data-bind="template: {name: 'table', with: grid } "></div>
+	<div class="table" id="table" data-bind="gfTable: table "></div>
 
 	<script type="text/javascript" charset="utf-8">
-		var grid = new tableModel(_rows, _fields);
-		grid.bind();
+		var table = new tableModel(_rows, _fields);
+		table.bind();
 	</script>
 </body>
 </html>
