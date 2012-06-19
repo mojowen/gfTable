@@ -104,6 +104,7 @@ tableModel = function(rows, fields, options) {
 		var all = allBindingsAccessor(),
 			value = valueAccessor()
 		all.template = {name: 'gfTable', with: value}
+		$(element).addClass('gfTable')
 	}}
 	ko.bindingHandlers.fillTable = {  init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 		var __base = viewModel.rows.__base,
