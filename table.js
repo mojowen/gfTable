@@ -53,7 +53,7 @@ tableModel = function(rows, fields, options) {
 			this.__widths( widths)
 		}
 	}
-	this.bind = function(no_ko) {
+	this.bind = function(no_ko,element) {
 		
 		ko.templateSources.stringTemplate = function(template, templates) {
 			this.templateName = template;
@@ -85,7 +85,9 @@ tableModel = function(rows, fields, options) {
 			};
 		}
 		ko.setTemplateEngine(createStringTemplateEngine(new ko.nativeTemplateEngine(), this.__templates()));
-		if( !no_ko ) ko.applyBindings( this );
+
+		element = typeof element == 'undefined' ? document.body : element
+		if( !no_ko ) ko.applyBindings( this, element );
 	}
 
 
