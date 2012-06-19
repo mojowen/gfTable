@@ -1,12 +1,12 @@
-tableModel = function(rows, fields) {
-	this.__options = {
+tableModel = function(rows, fields, options) {
+	this.__options = options || {
 		field: {
 			name: 'name',
 			data: 'name',
 			options: 'options',
 			type: 'type'
 		},
-		ender: 50
+		ender:  50
 	}
 	
 	// Templates
