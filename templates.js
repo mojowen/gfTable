@@ -64,7 +64,7 @@ $(document).on({
 		if( $('.ui-autocomplete').is(':hidden') ) { $(this).autocomplete('destroy'); }
 	}
 },'.suggest textarea')
-tableModel.__addTemplate('suggest','<textarea class="suggest data " data-bind="value: $parent[$data.{data_field}]"></textarea>')
+tableModel.__addTemplate('suggest','<textarea class="suggest data " data-bind="value: $parent[$data.{data_field}], valueUpdate: \'afterkeydown\'"></textarea>')
 
 
 $(document).on({
