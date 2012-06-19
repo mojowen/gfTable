@@ -21,7 +21,7 @@ tableModel = function(rows, fields, options) {
 	this.__widths = ko.observable({})
 	
 	// Rows
-	this.rows = ko.isObservable(rows) ? rows : ko.observableArraY(rows)
+	this.rows = ko.isObservable(rows) ? rows : ko.observableArray(rows)
 	this.rows.__base = ko.observable(20)
 	this.rows.__more = ko.computed( function() { return this.rows.__base() <= this.rows().length },this)
 	this.rows.__trimmed = ko.computed( function() {
@@ -31,7 +31,7 @@ tableModel = function(rows, fields, options) {
 	},this)
 
 	// Fields
-	this.fields = ko.isObservable(fields) ? fields : ko.observableArraY(fields)
+	this.fields = ko.isObservable(fields) ? fields : ko.observableArray(fields)
 	this.fields.__width = ko.computed(function() { 
 		var width = 0, fields = this.fields(), widths = this.__widths()
 		for (var i=0; i < fields.length; i++) {
