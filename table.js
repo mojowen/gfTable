@@ -11,7 +11,6 @@ tableModel = function(rows, fields, options) {
 	
 	// Templates
 	this.__templates = ko.observable({
-		row: '<div class="row" data-bind="template: {name: \'entry\', foreach: $parent.fields() }"></div>',
 		gfTable: '<div class="header gfTable"><div class="inner" data-bind="style: { width: ( $data.fields.__width()+'+this.__options.ender+')+\'px\' }, template: { name: \'gfT_header\', foreach: fields() }"><div class="ender" style="width: '+this.__options.ender+'px"></div></div></div>'+
 			'<div class="body gfTable" data-bind="syncScroll: \'.header\'"><div class="inner" data-bind="template: {name: \'gfT_row\', foreach: rows.__trimmed() }, fillTable: true, style: { width: $data.fields.__width()+\'px\' }" ></div></div>',
 		gfT_header: '<div class="title entry" data-bind="text: $data.'+this.__options.field.name+', setTemplateClass: $data.'+this.__options.field.type+'"></div>',
@@ -101,6 +100,11 @@ tableModel = function(rows, fields, options) {
 
 
 	// Bindings for the table
+	ko.bindingHandlers.gfTable = {  init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) { 
+		var all = allBindingsAccessor(),
+			value = valueAccessor()
+		all.template = {name: 'gfTable', with: value}
+	}}
 	ko.bindingHandlers.fillTable = {  init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 		var __base = viewModel.rows.__base,
 			__more = viewModel.rows.__more(),
