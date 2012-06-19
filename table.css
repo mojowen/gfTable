@@ -1,41 +1,40 @@
 .table {
-	width: 300px;
-	height: 600px;
-	overflow: visible;
 	margin-top: -30px;
+	overflow: visible;
 	padding: 30px 0 30px;
+	height: 300px;
 }
-.header {
+.gfTable.header {
 	overflow: hidden;
+	border-left: 1px solid #ddd;
 }
-.title {
+.gfTable .title {
 	font-weight: bold; 
 	text-align: center;
 	background: #a1a1a1;
 	color: #333;
 	height: 30px !important;
 }
-.ender {
+.gfTable .ender {
 	float: left;
 	height: 30px;
 }
-.body {
+.gfTable.body {
 	height: 100%;
 	width: 100%;
 	overflow-y: auto;
 	overflow-x: visible;
 	border-left: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
 }
 
-.row {
+.gfTable .row {
 	border: 0;
 	margin: 0;
 	clear: both;
 }
-.entry {
-	border-top: 1px solid #ddd;
+.gfTable .entry {
 	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	padding: 1px 0 0 1px;
 	width: 100px;
 	height: 30px;
@@ -44,8 +43,8 @@
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
-.entry.open { overflow: visible; }
-.entry textarea {
+.gfTable .entry.open { overflow: visible; }
+.gfTable .entry textarea {
 	border: none;
 	height: 28px;
 	resize: none;
@@ -58,10 +57,10 @@
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
-.entry textarea:focus {
+.gfTable .entry textarea:focus {
 	border: 2px solid #333; 
 }
-.entry .field_controller > * {
+.gfTable .entry .field_controller > * {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -69,21 +68,21 @@
 	user-select: none;
 }
 
-.entry.number { width: 60px; }
-.entry.number textarea { width: 35px; position: relative }
-.entry.number .number_controller { width: 23px; float: right; padding: 4px 0; }
-.entry .number_controller span { cursor: pointer; opacity: 0.4; }
-.entry .number_controller span:hover { opacity: 1; }
+.gfTable .entry.number { width: 60px; }
+.gfTable .entry.number textarea { width: 35px; position: relative }
+.gfTable .entry.number .number_controller { width: 23px; float: right; padding: 4px 0; }
+.gfTable .entry .number_controller span { cursor: pointer; opacity: 0.4; }
+.gfTable .entry .number_controller span:hover { opacity: 1; }
 
 
-.entry.block { width: 200px; }
-.entry textarea.block { width: 200px; text-align: left; }
-.entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }
+.gfTable .entry.block { width: 200px; }
+.gfTable .entry textarea.block { width: 200px; text-align: left; }
+.gfTable .entry.block.open textarea { position: relative; z-index: 100; background: #fff; resize: auto; }
 
 
 
-.entry.multiselect, .entry.select { width: 120px; padding:0; text-align: center; }
-.ui-multiselect-menu { 
+.gfTable .entry.multiselect, .entry.select { width: 120px; padding:0; text-align: center; }
+.gfTable .ui-multiselect-menu { 
 	display: none; 
 	position: relative; 
 	top: 0; 
@@ -97,26 +96,26 @@
 	text-align: left;
 	z-index: 10;
 }
-.ui-multiselect-menu input, .ui-multiselect-menu span, .ui-multiselect-menu label { font-size: 11px; }
-button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 auto; height: 18px; }
-.ui-multiselect.ui-state-active { color: #622; font-weight: bold }
-.ui-multiselect-menu ul {  list-style: none; margin: 0; padding: 0 0 0 2px; text-align: left }
-.ui-multiselect-menu ul li { margin: 4px 0 }
-.ui-multiselect-menu ul li span { padding: 0; opacity: 0.65 }
-.ui-widget-header ul { margin: 0; font-size: 8px; padding: 0 }
-.ui-widget-header ul li { margin: -30px 4px 36px 0; padding: 0 }
-.ui-widget-header ul li.other {  margin: 2px 0 0 8px; padding: 0 }
-.ui-widget-header a.ui-multiselect-close :before { content: 'x'; }
-.ui-widget-header a.ui-multiselect-close { float: right; text-decoration: none; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333; }
-.ui-widget-header a.ui-multiselect-close:hover { opacity: 1 }
-.ui-multiselect-menu .ui-state-hover span { opacity: 1; font-weight: bold }
-.ui-multiselect-menu .ui-state-active span { font-weight: bold }
+.gfTable .ui-multiselect-menu input, .gfTable .ui-multiselect-menu span, .ui-multiselect-menu label { font-size: 11px; }
+.gfTable button.trigger, .gfTable button.ui-multiselect { width: 100px; color: #747474; margin: 0 auto; height: 18px; }
+.gfTable .ui-multiselect.ui-state-active { color: #622; font-weight: bold }
+.gfTable .ui-multiselect-menu ul {  list-style: none; margin: 0; padding: 0 0 0 2px; text-align: left }
+.gfTable .ui-multiselect-menu ul li { margin: 4px 0 }
+.gfTable .ui-multiselect-menu ul li span { padding: 0; opacity: 0.65 }
+.gfTable .ui-widget-header ul { margin: 0; font-size: 8px; padding: 0 }
+.gfTable .ui-widget-header ul li { margin: -30px 4px 36px 0; padding: 0 }
+.gfTable .ui-widget-header ul li.other {  margin: 2px 0 0 8px; padding: 0 }
+.gfTable .ui-widget-header a.ui-multiselect-close :before { content: 'x'; }
+.gfTable .ui-widget-header a.ui-multiselect-close { float: right; text-decoration: none; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333; }
+.gfTable .ui-widget-header a.ui-multiselect-close:hover { opacity: 1 }
+.gfTable .ui-multiselect-menu .ui-state-hover span { opacity: 1; font-weight: bold }
+.gfTable .ui-multiselect-menu .ui-state-active span { font-weight: bold }
 
-.entry.date {width: 140px;}
-.entry.date textarea {width: 110px;}
-.entry.date .date_controller {  width: 24px; float: right;  height: 20px; opacity: 0.6; background: transparent url(icons.png) top left no-repeat; cursor: pointer; }
-.entry.date .date_controller:hover {  opacity: 1; }
-.entry.date .date_controller.hasDatepicker { 
+.gfTable .entry.date {width: 140px;}
+.gfTable .entry.date textarea {width: 110px;}
+.gfTable .entry.date .date_controller {  width: 24px; float: right;  height: 20px; opacity: 0.6; background: transparent url(icons.png) top left no-repeat; cursor: pointer; }
+.gfTable .entry.date .date_controller:hover {  opacity: 1; }
+.gfTable .entry.date .date_controller.hasDatepicker { 
 	float: none;
 	clear: both;
 	opacity: 1;
@@ -136,22 +135,21 @@ button.trigger, button.ui-multiselect { width: 100px; color: #747474; margin: 0 
 	width: 130px;
 }
 
-.ui-datepicker-calendar { margin: 0; width: 100%;}
+.gfTable .ui-datepicker-calendar { margin: 0; width: 100%;}
+.gfTable .ui-datepicker-calendar tr td { background-color: #fff; }
+.gfTable .ui-datepicker-calendar td, .ui-datepicker-title { text-align: center; }
+.gfTable .ui-datepicker-prev { float: left; }
+.gfTable .ui-datepicker-next { float: right; }
+.gfTable .ui-datepicker-calendar tr td:hover { background-color: #ddd; }
+.gfTable .ui-datepicker-calendar tr td.ui-state-disabled:hover { background-color: transparent; }
+.gfTable .ui-datepicker-calendar tr td { background-color: #fff; border: 1px solid #fff; }
+.gfTable .ui-datepicker-calendar tr td.ui-datepicker-today { background-color: #747474; }
+.gfTable .ui-datepicker-calendar td.ui-datepicker-current-day { border: 1px dashed #333; }
+.gfTable .hasDatepicker .close { float: right; margin: -30px 0 0 0; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333 }
+.gfTable .hasDatepicker .close:hover { opacity: 1; }
 
-.ui-datepicker-calendar tr td { background-color: #fff; }
-.ui-datepicker-calendar td, .ui-datepicker-title { text-align: center; }
-.ui-datepicker-prev { float: left; }
-.ui-datepicker-next { float: right; }
-.ui-datepicker-calendar tr td:hover { background-color: #ddd; }
-.ui-datepicker-calendar tr td.ui-state-disabled:hover { background-color: transparent; }
-.ui-datepicker-calendar tr td { background-color: #fff; border: 1px solid #fff; }
-.ui-datepicker-calendar tr td.ui-datepicker-today { background-color: #747474; }
-.ui-datepicker-calendar td.ui-datepicker-current-day { border: 1px dashed #333; }
-.hasDatepicker .close { float: right; margin: -30px 0 0 0; font-weight: bold; opacity: 0.6; cursor: pointer; border: 1px solid #000; color: #fff; border-radius: 2px; padding: 2px 4px; background: #333 }
-.hasDatepicker .close:hover { opacity: 1; }
 
-
-ul.ui-autocomplete {
+.gfTable ul.ui-autocomplete {
 	background-color: #fff;
 	list-style: square;
 	padding: 0 20px 0 0;
@@ -164,13 +162,13 @@ ul.ui-autocomplete {
 	overflow-x: hidden;
 }
 
-ul.ui-autocomplete li.ui-menu-item { cursor: pointer; opacity: 0.6; padding: 4px 0 4px; }
-ul.ui-autocomplete li.ui-menu-item a { 	color: #000; cursor: pointer; opacity: 0.6; }
-ul.ui-autocomplete li.ui-menu-item a.ui-state-hover { opacity: 1; font-weight: bold }
+.gfTable ul.ui-autocomplete li.ui-menu-item { cursor: pointer; opacity: 0.6; padding: 4px 0 4px; }
+.gfTable ul.ui-autocomplete li.ui-menu-item a { 	color: #000; cursor: pointer; opacity: 0.6; }
+.gfTable ul.ui-autocomplete li.ui-menu-item a.ui-state-hover { opacity: 1; font-weight: bold }
 
 
-.entry.array { width: 160px; padding: 0 }
-.entry.array .array { 
+.gfTable .entry.array { width: 160px; padding: 0 }
+.gfTable .entry.array .array { 
 	min-height: 31px;
 	width: 160px;
 	box-sizing: border-box;
@@ -181,6 +179,6 @@ ul.ui-autocomplete li.ui-menu-item a.ui-state-hover { opacity: 1; font-weight: b
 	background-color: #fff;
 	position: relative;
 }
-.entry.array.open .array { border: 2px solid #ddd; z-index: 10; margin: -1px 0 0 -1px; width: 161px }
-.entry.array .array a { white-space: nowrap; float: left; text-decoration: none; background-color: #622; border-radius: 4px; cursor: pointer; padding: 1px 4px 2px; margin: 2px; color: #fff; }
-.entry.array .array a:hover { background-color: #226; }
+.gfTable .entry.array.open .array { border: 2px solid #ddd; z-index: 10; margin: -1px 0 0 -1px; width: 161px }
+.gfTable .entry.array .array a { white-space: nowrap; float: left; text-decoration: none; background-color: #622; border-radius: 4px; cursor: pointer; padding: 1px 4px 2px; margin: 2px; color: #fff; }
+.gfTable .entry.array .array a:hover { background-color: #226; }
